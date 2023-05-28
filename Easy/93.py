@@ -8,20 +8,18 @@ from bisect import bisect, bisect_left, bisect_right
 from functools import reduce
 from decimal import Decimal, getcontext
 
-S = input()
-D = deque()
-cnt = 0
+N = int(input())
+A = list(map(int,input().split()))
+D = list(accumulate(A))
+S = sum(A)
+ans = 10**18
 
-for i in range(len(S)):
-    D.append(S[i])
-    
-    if len(D) >= 2:
-        b = D.pop()
-        a = D.pop()
-        if a == b:
-            D.append(a)
-            D.append(b)
-            continue
-        cnt += 2
+for i in range(N-1):
+    diff = S-D[i]
+    if diff == S//2:
+        print(0)
+        exit()
+    else:
+        ans = min(ans,abs(D[i]-diff))
 
-print(cnt)
+print(ans)
