@@ -2,8 +2,8 @@ N = int(input())
 A = list(map(int,input().split()))
 cnt = 0
 
-for i in A:
-    if i%2 == 0:
+for i in range(N):
+    if i+1 == A[A[i]-1]:
         cnt += 1
         
-print(3**N-2**cnt)
+print(cnt//2)
