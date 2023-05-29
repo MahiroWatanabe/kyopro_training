@@ -1,12 +1,11 @@
 S = input()
-A = [0 for _ in range(len(S)+1)]
 
-for i in range(len(S)):
-    if S[i] == "<":
-        A[i+1] = max(A[i+1],A[i]+1)
-
-for i in range(len(S)-1,-1,-1):
-    if S[i] == ">":
-        A[i] = max(A[i],A[i+1]+1)
-
-print(sum(A))
+while True:
+    value = S[-1]
+    S = S[:-1]
+    
+    if len(S)%2 == 0:
+        a,b = S[:len(S)//2],S[len(S)//2:]
+        if a == b:
+            print(len(S))
+            exit()
