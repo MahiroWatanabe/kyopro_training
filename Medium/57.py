@@ -9,21 +9,13 @@ from functools import reduce
 from decimal import Decimal, getcontext
 
 N = int(input())
-A = list(map(int,input().split()))
-cnt = 0
-a,b = 0,0
-D = []
+D = defaultdict(int)
+for _ in range(N):
+    s = "".join(sorted(input()))
+    D[s] += 1
+ans = 0
 
-for i,j in Counter(A).most_common():
-    if j >= 4:
-        D.append(i)
-        D.append(i)
-    elif j >= 2:
-        D.append(i)
-        
-D.sort()
+for key,value in D.items():
+    ans += value*(value-1)//2
 
-if len(D) >= 2:
-    print(D[-1]*D[-2])
-else:
-    print(0)
+print(ans)
