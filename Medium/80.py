@@ -1,11 +1,16 @@
-import sys, re, string
-from math import ceil, floor, sqrt, pi, factorial, gcd, log, log10, log2, inf, cos, sin
-from copy import deepcopy, copy
-from collections import Counter, deque, defaultdict
-from heapq import heapify, heappop, heappush
-from itertools import accumulate, product, combinations, combinations_with_replacement, permutations,groupby
-from bisect import bisect, bisect_left, bisect_right
-from functools import reduce
-from decimal import Decimal, getcontext
+N = int(input())
+S = input()
+A = [chr(ord('a')+i) for i in range(26)]
+D = {i:0 for i in A}
+ans = 1
 
-print(factorial(10**5))
+for i in S:
+    D[i] += 1
+
+for i,j in D.items():
+    if j != 0:
+        ans *= j+1
+        
+ans %= 10**9+7
+
+print(ans-1)
