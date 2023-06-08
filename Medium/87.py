@@ -1,24 +1,29 @@
-import sys, re, string
-from math import ceil, floor, sqrt, pi, factorial, gcd, log, log10, log2, inf, cos, sin
-from copy import deepcopy, copy
-from collections import Counter, deque, defaultdict
-from heapq import heapify, heappop, heappush
-from itertools import accumulate, product, combinations, combinations_with_replacement, permutations,groupby
-from bisect import bisect, bisect_left, bisect_right
-from functools import reduce
-from decimal import Decimal, getcontext
-
 N = int(input())
 A = list(map(int,input().split()))
-D = Counter(A)
-k = list(D.keys())
-v = list(D.values())
+B = list(map(int,input().split()))
+cnt = 0
+min_value, max_value = 0,0
+max_array = []
+S = 0
 
-if len(D) == 1 and 0 in k:
-    print("Yes")
-elif len(D) == 2 and 0 in k and (v[0] == v[1]*2 or v[1] == v[0]*2):
-    print("Yes")
-elif len(D) == 3 and k[0]^k[1]^k[2] == 0 and v[0] == v[1] == v[2]:
-    print("Yes")
+for i in range(N):
+    if A[i] < B[i]:
+        cnt += 1
+        min_value += B[i]-A[i]
+    elif A[i] > B[i]:
+        max_value += A[i]-B[i]
+        max_array.append([i,A[i]-B[i]])
+        
+max_array.sort(reverse=True, key= lambda x:x[1])
+
+if min_value == 0:
+    print(0)
+elif min_value <= max_value:
+    for i in range(len(max_array)):
+        S += max_array[i][1]
+        cnt += 1
+        if min_value <= S:
+            print(cnt)
+            exit()
 else:
-    print("No")
+    print(-1)
